@@ -5,6 +5,7 @@ import com.example.bankingapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,7 +30,7 @@ public class UserResource {
     }
 
     @PostMapping("/users")
-    public void createUser(@RequestBody User user){
+    public void createUser(@Valid @RequestBody User user){
         userService.createUser(user);
     }
 }
