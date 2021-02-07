@@ -1,6 +1,7 @@
 package com.example.bankingapp.service;
 
 import com.example.bankingapp.entity.User;
+import com.example.bankingapp.errorhandler.UserNotFoundException;
 import com.example.bankingapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,15 +21,23 @@ public class UserService {
 
     public User findUser(Integer id){
         Optional<User> user  = userRepository.findById(id);
+        if(user.isEmpty()){
+            throw new UserNotFoundException("User not found for id:"+id);
+        }
         return user.get();
     }
 
     public void deleteUser(Integer id){
-        userRepository.deleteById(id);
+        Optional<User> user  = userRepository.findById(id);
+        if(user.isEmpty()){
+            throw new UserNotFoundException("User not found for id:"+id);
+        }else{
+            userRepository.deleteById(id);
+        }
+
     }
 
     public User createUser(User user){
-        User savedUser = userRepository.save(user);
-        return savedUser;
+        return userRepository.save(user);
     }
 }
