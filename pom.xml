@@ -15,7 +15,10 @@
 	<description>Demo project for Banking App</description>
 	<properties>
 		<java.version>11</java.version>
+		<jkube.generator.name>142455/${project.artifactId}:%l</jkube.generator.name>
+		<jkube.enricher.jkube-service.type>NodePort</jkube.enricher.jkube-service.type>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -65,6 +68,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.jkube</groupId>
+				<artifactId>kubernetes-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
